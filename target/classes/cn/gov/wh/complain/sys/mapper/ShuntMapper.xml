@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.gov.wh.complain.sys.mapper.ShuntMapper" >
+  <resultMap id="BaseResultMap" type="cn.gov.wh.complain.sys.pojo.Shunt" >
+    <id column="shuntid" property="shuntid" jdbcType="VARCHAR" />
+    <result column="repid" property="repid" jdbcType="VARCHAR" />
+    <result column="complainregid" property="complainregid" jdbcType="VARCHAR" />
+    <result column="shuntreport" property="shuntreport" jdbcType="VARCHAR" />
+    <result column="deadline" property="deadline" jdbcType="DATE" />
+    <result column="inputcompany" property="inputcompany" jdbcType="VARCHAR" />
+    <result column="outcompany" property="outcompany" jdbcType="VARCHAR" />
+    <result column="shunttime" property="shunttime" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.gov.wh.complain.sys.pojo.Shunt" extends="BaseResultMap" >
+    <result column="append" property="append" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    shuntid, repid, complainregid, shuntreport, deadline, inputcompany, outcompany, shunttime
+  </sql>
+  <sql id="Blob_Column_List" >
+    append
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.gov.wh.complain.sys.pojo.ShuntExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shunt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.gov.wh.complain.sys.pojo.ShuntExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shunt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shunt
+    where shuntid = #{shuntid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from shunt
+    where shuntid = #{shuntid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.gov.wh.complain.sys.pojo.ShuntExample" >
+    delete from shunt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.gov.wh.complain.sys.pojo.Shunt" >
+    insert into shunt (shuntid, repid, complainregid, 
+      shuntreport, deadline, inputcompany, 
+      outcompany, shunttime, append
+      )
+    values (#{shuntid,jdbcType=VARCHAR}, #{repid,jdbcType=VARCHAR}, #{complainregid,jdbcType=VARCHAR}, 
+      #{shuntreport,jdbcType=VARCHAR}, #{deadline,jdbcType=DATE}, #{inputcompany,jdbcType=VARCHAR}, 
+      #{outcompany,jdbcType=VARCHAR}, #{shunttime,jdbcType=DATE}, #{append,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.gov.wh.complain.sys.pojo.Shunt" >
+    insert into shunt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shuntid != null" >
+        shuntid,
+      </if>
+      <if test="repid != null" >
+        repid,
+      </if>
+      <if test="complainregid != null" >
+        complainregid,
+      </if>
+      <if test="shuntreport != null" >
+        shuntreport,
+      </if>
+      <if test="deadline != null" >
+        deadline,
+      </if>
+      <if test="inputcompany != null" >
+        inputcompany,
+      </if>
+      <if test="outcompany != null" >
+        outcompany,
+      </if>
+      <if test="shunttime != null" >
+        shunttime,
+      </if>
+      <if test="append != null" >
+        append,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shuntid != null" >
+        #{shuntid,jdbcType=VARCHAR},
+      </if>
+      <if test="repid != null" >
+        #{repid,jdbcType=VARCHAR},
+      </if>
+      <if test="complainregid != null" >
+        #{complainregid,jdbcType=VARCHAR},
+      </if>
+      <if test="shuntreport != null" >
+        #{shuntreport,jdbcType=VARCHAR},
+      </if>
+      <if test="deadline != null" >
+        #{deadline,jdbcType=DATE},
+      </if>
+      <if test="inputcompany != null" >
+        #{inputcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="outcompany != null" >
+        #{outcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="shunttime != null" >
+        #{shunttime,jdbcType=DATE},
+      </if>
+      <if test="append != null" >
+        #{append,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.gov.wh.complain.sys.pojo.ShuntExample" resultType="java.lang.Integer" >
+    select count(*) from shunt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shunt
+    <set >
+      <if test="record.shuntid != null" >
+        shuntid = #{record.shuntid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repid != null" >
+        repid = #{record.repid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.complainregid != null" >
+        complainregid = #{record.complainregid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shuntreport != null" >
+        shuntreport = #{record.shuntreport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deadline != null" >
+        deadline = #{record.deadline,jdbcType=DATE},
+      </if>
+      <if test="record.inputcompany != null" >
+        inputcompany = #{record.inputcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outcompany != null" >
+        outcompany = #{record.outcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shunttime != null" >
+        shunttime = #{record.shunttime,jdbcType=DATE},
+      </if>
+      <if test="record.append != null" >
+        append = #{record.append,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update shunt
+    set shuntid = #{record.shuntid,jdbcType=VARCHAR},
+      repid = #{record.repid,jdbcType=VARCHAR},
+      complainregid = #{record.complainregid,jdbcType=VARCHAR},
+      shuntreport = #{record.shuntreport,jdbcType=VARCHAR},
+      deadline = #{record.deadline,jdbcType=DATE},
+      inputcompany = #{record.inputcompany,jdbcType=VARCHAR},
+      outcompany = #{record.outcompany,jdbcType=VARCHAR},
+      shunttime = #{record.shunttime,jdbcType=DATE},
+      append = #{record.append,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shunt
+    set shuntid = #{record.shuntid,jdbcType=VARCHAR},
+      repid = #{record.repid,jdbcType=VARCHAR},
+      complainregid = #{record.complainregid,jdbcType=VARCHAR},
+      shuntreport = #{record.shuntreport,jdbcType=VARCHAR},
+      deadline = #{record.deadline,jdbcType=DATE},
+      inputcompany = #{record.inputcompany,jdbcType=VARCHAR},
+      outcompany = #{record.outcompany,jdbcType=VARCHAR},
+      shunttime = #{record.shunttime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.gov.wh.complain.sys.pojo.Shunt" >
+    update shunt
+    <set >
+      <if test="repid != null" >
+        repid = #{repid,jdbcType=VARCHAR},
+      </if>
+      <if test="complainregid != null" >
+        complainregid = #{complainregid,jdbcType=VARCHAR},
+      </if>
+      <if test="shuntreport != null" >
+        shuntreport = #{shuntreport,jdbcType=VARCHAR},
+      </if>
+      <if test="deadline != null" >
+        deadline = #{deadline,jdbcType=DATE},
+      </if>
+      <if test="inputcompany != null" >
+        inputcompany = #{inputcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="outcompany != null" >
+        outcompany = #{outcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="shunttime != null" >
+        shunttime = #{shunttime,jdbcType=DATE},
+      </if>
+      <if test="append != null" >
+        append = #{append,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where shuntid = #{shuntid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.gov.wh.complain.sys.pojo.Shunt" >
+    update shunt
+    set repid = #{repid,jdbcType=VARCHAR},
+      complainregid = #{complainregid,jdbcType=VARCHAR},
+      shuntreport = #{shuntreport,jdbcType=VARCHAR},
+      deadline = #{deadline,jdbcType=DATE},
+      inputcompany = #{inputcompany,jdbcType=VARCHAR},
+      outcompany = #{outcompany,jdbcType=VARCHAR},
+      shunttime = #{shunttime,jdbcType=DATE},
+      append = #{append,jdbcType=LONGVARCHAR}
+    where shuntid = #{shuntid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.gov.wh.complain.sys.pojo.Shunt" >
+    update shunt
+    set repid = #{repid,jdbcType=VARCHAR},
+      complainregid = #{complainregid,jdbcType=VARCHAR},
+      shuntreport = #{shuntreport,jdbcType=VARCHAR},
+      deadline = #{deadline,jdbcType=DATE},
+      inputcompany = #{inputcompany,jdbcType=VARCHAR},
+      outcompany = #{outcompany,jdbcType=VARCHAR},
+      shunttime = #{shunttime,jdbcType=DATE}
+    where shuntid = #{shuntid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.gov.wh.complain.sys.mapper.ModuleMapper" >
+  <resultMap id="BaseResultMap" type="cn.gov.wh.complain.sys.pojo.Module" >
+    <id column="moduleid" property="moduleid" jdbcType="VARCHAR" />
+    <result column="parentid" property="parentid" jdbcType="VARCHAR" />
+    <result column="parentname" property="parentname" jdbcType="VARCHAR" />
+    <result column="modulename" property="modulename" jdbcType="VARCHAR" />
+    <result column="ordernum" property="ordernum" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="modulestatus" property="modulestatus" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    moduleid, parentid, parentname, modulename, ordernum, description, modulestatus, 
+    url
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.gov.wh.complain.sys.pojo.ModuleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from module
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from module
+    where moduleid = #{moduleid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from module
+    where moduleid = #{moduleid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.gov.wh.complain.sys.pojo.ModuleExample" >
+    delete from module
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.gov.wh.complain.sys.pojo.Module" >
+    insert into module (moduleid, parentid, parentname, 
+      modulename, ordernum, description, 
+      modulestatus, url)
+    values (#{moduleid,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR}, #{parentname,jdbcType=VARCHAR}, 
+      #{modulename,jdbcType=VARCHAR}, #{ordernum,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+      #{modulestatus,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.gov.wh.complain.sys.pojo.Module" >
+    insert into module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="moduleid != null" >
+        moduleid,
+      </if>
+      <if test="parentid != null" >
+        parentid,
+      </if>
+      <if test="parentname != null" >
+        parentname,
+      </if>
+      <if test="modulename != null" >
+        modulename,
+      </if>
+      <if test="ordernum != null" >
+        ordernum,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="modulestatus != null" >
+        modulestatus,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="moduleid != null" >
+        #{moduleid,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="parentname != null" >
+        #{parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="modulename != null" >
+        #{modulename,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernum != null" >
+        #{ordernum,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="modulestatus != null" >
+        #{modulestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.gov.wh.complain.sys.pojo.ModuleExample" resultType="java.lang.Integer" >
+    select count(*) from module
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update module
+    <set >
+      <if test="record.moduleid != null" >
+        moduleid = #{record.moduleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentid != null" >
+        parentid = #{record.parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentname != null" >
+        parentname = #{record.parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modulename != null" >
+        modulename = #{record.modulename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordernum != null" >
+        ordernum = #{record.ordernum,jdbcType=INTEGER},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modulestatus != null" >
+        modulestatus = #{record.modulestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update module
+    set moduleid = #{record.moduleid,jdbcType=VARCHAR},
+      parentid = #{record.parentid,jdbcType=VARCHAR},
+      parentname = #{record.parentname,jdbcType=VARCHAR},
+      modulename = #{record.modulename,jdbcType=VARCHAR},
+      ordernum = #{record.ordernum,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=VARCHAR},
+      modulestatus = #{record.modulestatus,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.gov.wh.complain.sys.pojo.Module" >
+    update module
+    <set >
+      <if test="parentid != null" >
+        parentid = #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="parentname != null" >
+        parentname = #{parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="modulename != null" >
+        modulename = #{modulename,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernum != null" >
+        ordernum = #{ordernum,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="modulestatus != null" >
+        modulestatus = #{modulestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where moduleid = #{moduleid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.gov.wh.complain.sys.pojo.Module" >
+    update module
+    set parentid = #{parentid,jdbcType=VARCHAR},
+      parentname = #{parentname,jdbcType=VARCHAR},
+      modulename = #{modulename,jdbcType=VARCHAR},
+      ordernum = #{ordernum,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      modulestatus = #{modulestatus,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR}
+    where moduleid = #{moduleid,jdbcType=VARCHAR}
+  </update>
+</mapper>

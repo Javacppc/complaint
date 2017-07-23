@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.gov.wh.complain.sys.mapper.ComplainregMapper" >
+  <resultMap id="BaseResultMap" type="cn.gov.wh.complain.sys.pojo.Complainreg" >
+    <id column="complainregid" property="complainregid" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="feedbackid" property="feedbackid" jdbcType="VARCHAR" />
+    <result column="shuntid" property="shuntid" jdbcType="VARCHAR" />
+    <result column="returnid" property="returnid" jdbcType="VARCHAR" />
+    <result column="regdept" property="regdept" jdbcType="VARCHAR" />
+    <result column="register" property="register" jdbcType="VARCHAR" />
+    <result column="regtime" property="regtime" jdbcType="DATE" />
+    <result column="_type" property="type" jdbcType="VARCHAR" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="BIT" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="respect" property="respect" jdbcType="VARCHAR" />
+    <result column="atype" property="atype" jdbcType="VARCHAR" />
+    <result column="zipcode" property="zipcode" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="becompany" property="becompany" jdbcType="VARCHAR" />
+    <result column="comtele" property="comtele" jdbcType="VARCHAR" />
+    <result column="productname" property="productname" jdbcType="VARCHAR" />
+    <result column="comzipcode" property="comzipcode" jdbcType="VARCHAR" />
+    <result column="comadd" property="comadd" jdbcType="VARCHAR" />
+    <result column="happendtime" property="happendtime" jdbcType="DATE" />
+    <result column="happendaddress" property="happendaddress" jdbcType="VARCHAR" />
+    <result column="belongarea" property="belongarea" jdbcType="INTEGER" />
+    <result column="yuan" property="yuan" jdbcType="REAL" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="dispute" property="dispute" jdbcType="VARCHAR" />
+    <result column="_specific" property="specific" jdbcType="VARCHAR" />
+    <result column="processstatu" property="processstatu" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    complainregid, userid, feedbackid, shuntid, returnid, regdept, register, regtime, 
+    _type, cname, gender, telephone, mobile, respect, atype, zipcode, address, becompany, 
+    comtele, productname, comzipcode, comadd, happendtime, happendaddress, belongarea, 
+    yuan, num, content, dispute, _specific, processstatu
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.gov.wh.complain.sys.pojo.ComplainregExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from complainreg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from complainreg
+    where complainregid = #{complainregid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from complainreg
+    where complainregid = #{complainregid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.gov.wh.complain.sys.pojo.ComplainregExample" >
+    delete from complainreg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.gov.wh.complain.sys.pojo.Complainreg" >
+    insert into complainreg (complainregid, userid, feedbackid, 
+      shuntid, returnid, regdept, 
+      register, regtime, _type, 
+      cname, gender, telephone, 
+      mobile, respect, atype, 
+      zipcode, address, becompany, 
+      comtele, productname, comzipcode, 
+      comadd, happendtime, happendaddress, 
+      belongarea, yuan, num, 
+      content, dispute, _specific, 
+      processstatu)
+    values (#{complainregid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{feedbackid,jdbcType=VARCHAR}, 
+      #{shuntid,jdbcType=VARCHAR}, #{returnid,jdbcType=VARCHAR}, #{regdept,jdbcType=VARCHAR}, 
+      #{register,jdbcType=VARCHAR}, #{regtime,jdbcType=DATE}, #{type,jdbcType=VARCHAR}, 
+      #{cname,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, #{telephone,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{respect,jdbcType=VARCHAR}, #{atype,jdbcType=VARCHAR}, 
+      #{zipcode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{becompany,jdbcType=VARCHAR}, 
+      #{comtele,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, #{comzipcode,jdbcType=VARCHAR}, 
+      #{comadd,jdbcType=VARCHAR}, #{happendtime,jdbcType=DATE}, #{happendaddress,jdbcType=VARCHAR}, 
+      #{belongarea,jdbcType=INTEGER}, #{yuan,jdbcType=REAL}, #{num,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{dispute,jdbcType=VARCHAR}, #{specific,jdbcType=VARCHAR}, 
+      #{processstatu,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.gov.wh.complain.sys.pojo.Complainreg" >
+    insert into complainreg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="complainregid != null" >
+        complainregid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="feedbackid != null" >
+        feedbackid,
+      </if>
+      <if test="shuntid != null" >
+        shuntid,
+      </if>
+      <if test="returnid != null" >
+        returnid,
+      </if>
+      <if test="regdept != null" >
+        regdept,
+      </if>
+      <if test="register != null" >
+        register,
+      </if>
+      <if test="regtime != null" >
+        regtime,
+      </if>
+      <if test="type != null" >
+        _type,
+      </if>
+      <if test="cname != null" >
+        cname,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="respect != null" >
+        respect,
+      </if>
+      <if test="atype != null" >
+        atype,
+      </if>
+      <if test="zipcode != null" >
+        zipcode,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="becompany != null" >
+        becompany,
+      </if>
+      <if test="comtele != null" >
+        comtele,
+      </if>
+      <if test="productname != null" >
+        productname,
+      </if>
+      <if test="comzipcode != null" >
+        comzipcode,
+      </if>
+      <if test="comadd != null" >
+        comadd,
+      </if>
+      <if test="happendtime != null" >
+        happendtime,
+      </if>
+      <if test="happendaddress != null" >
+        happendaddress,
+      </if>
+      <if test="belongarea != null" >
+        belongarea,
+      </if>
+      <if test="yuan != null" >
+        yuan,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="dispute != null" >
+        dispute,
+      </if>
+      <if test="specific != null" >
+        _specific,
+      </if>
+      <if test="processstatu != null" >
+        processstatu,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="complainregid != null" >
+        #{complainregid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackid != null" >
+        #{feedbackid,jdbcType=VARCHAR},
+      </if>
+      <if test="shuntid != null" >
+        #{shuntid,jdbcType=VARCHAR},
+      </if>
+      <if test="returnid != null" >
+        #{returnid,jdbcType=VARCHAR},
+      </if>
+      <if test="regdept != null" >
+        #{regdept,jdbcType=VARCHAR},
+      </if>
+      <if test="register != null" >
+        #{register,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=DATE},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=BIT},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="respect != null" >
+        #{respect,jdbcType=VARCHAR},
+      </if>
+      <if test="atype != null" >
+        #{atype,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="becompany != null" >
+        #{becompany,jdbcType=VARCHAR},
+      </if>
+      <if test="comtele != null" >
+        #{comtele,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="comzipcode != null" >
+        #{comzipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="comadd != null" >
+        #{comadd,jdbcType=VARCHAR},
+      </if>
+      <if test="happendtime != null" >
+        #{happendtime,jdbcType=DATE},
+      </if>
+      <if test="happendaddress != null" >
+        #{happendaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="belongarea != null" >
+        #{belongarea,jdbcType=INTEGER},
+      </if>
+      <if test="yuan != null" >
+        #{yuan,jdbcType=REAL},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="dispute != null" >
+        #{dispute,jdbcType=VARCHAR},
+      </if>
+      <if test="specific != null" >
+        #{specific,jdbcType=VARCHAR},
+      </if>
+      <if test="processstatu != null" >
+        #{processstatu,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.gov.wh.complain.sys.pojo.ComplainregExample" resultType="java.lang.Integer" >
+    select count(*) from complainreg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update complainreg
+    <set >
+      <if test="record.complainregid != null" >
+        complainregid = #{record.complainregid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackid != null" >
+        feedbackid = #{record.feedbackid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shuntid != null" >
+        shuntid = #{record.shuntid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnid != null" >
+        returnid = #{record.returnid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regdept != null" >
+        regdept = #{record.regdept,jdbcType=VARCHAR},
+      </if>
+      <if test="record.register != null" >
+        register = #{record.register,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regtime != null" >
+        regtime = #{record.regtime,jdbcType=DATE},
+      </if>
+      <if test="record.type != null" >
+        _type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cname != null" >
+        cname = #{record.cname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=BIT},
+      </if>
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.respect != null" >
+        respect = #{record.respect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.atype != null" >
+        atype = #{record.atype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zipcode != null" >
+        zipcode = #{record.zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.becompany != null" >
+        becompany = #{record.becompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comtele != null" >
+        comtele = #{record.comtele,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productname != null" >
+        productname = #{record.productname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comzipcode != null" >
+        comzipcode = #{record.comzipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comadd != null" >
+        comadd = #{record.comadd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.happendtime != null" >
+        happendtime = #{record.happendtime,jdbcType=DATE},
+      </if>
+      <if test="record.happendaddress != null" >
+        happendaddress = #{record.happendaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.belongarea != null" >
+        belongarea = #{record.belongarea,jdbcType=INTEGER},
+      </if>
+      <if test="record.yuan != null" >
+        yuan = #{record.yuan,jdbcType=REAL},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dispute != null" >
+        dispute = #{record.dispute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specific != null" >
+        _specific = #{record.specific,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processstatu != null" >
+        processstatu = #{record.processstatu,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update complainreg
+    set complainregid = #{record.complainregid,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      feedbackid = #{record.feedbackid,jdbcType=VARCHAR},
+      shuntid = #{record.shuntid,jdbcType=VARCHAR},
+      returnid = #{record.returnid,jdbcType=VARCHAR},
+      regdept = #{record.regdept,jdbcType=VARCHAR},
+      register = #{record.register,jdbcType=VARCHAR},
+      regtime = #{record.regtime,jdbcType=DATE},
+      _type = #{record.type,jdbcType=VARCHAR},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=BIT},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      respect = #{record.respect,jdbcType=VARCHAR},
+      atype = #{record.atype,jdbcType=VARCHAR},
+      zipcode = #{record.zipcode,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      becompany = #{record.becompany,jdbcType=VARCHAR},
+      comtele = #{record.comtele,jdbcType=VARCHAR},
+      productname = #{record.productname,jdbcType=VARCHAR},
+      comzipcode = #{record.comzipcode,jdbcType=VARCHAR},
+      comadd = #{record.comadd,jdbcType=VARCHAR},
+      happendtime = #{record.happendtime,jdbcType=DATE},
+      happendaddress = #{record.happendaddress,jdbcType=VARCHAR},
+      belongarea = #{record.belongarea,jdbcType=INTEGER},
+      yuan = #{record.yuan,jdbcType=REAL},
+      num = #{record.num,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      dispute = #{record.dispute,jdbcType=VARCHAR},
+      _specific = #{record.specific,jdbcType=VARCHAR},
+      processstatu = #{record.processstatu,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.gov.wh.complain.sys.pojo.Complainreg" >
+    update complainreg
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackid != null" >
+        feedbackid = #{feedbackid,jdbcType=VARCHAR},
+      </if>
+      <if test="shuntid != null" >
+        shuntid = #{shuntid,jdbcType=VARCHAR},
+      </if>
+      <if test="returnid != null" >
+        returnid = #{returnid,jdbcType=VARCHAR},
+      </if>
+      <if test="regdept != null" >
+        regdept = #{regdept,jdbcType=VARCHAR},
+      </if>
+      <if test="register != null" >
+        register = #{register,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        regtime = #{regtime,jdbcType=DATE},
+      </if>
+      <if test="type != null" >
+        _type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=BIT},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="respect != null" >
+        respect = #{respect,jdbcType=VARCHAR},
+      </if>
+      <if test="atype != null" >
+        atype = #{atype,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        zipcode = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="becompany != null" >
+        becompany = #{becompany,jdbcType=VARCHAR},
+      </if>
+      <if test="comtele != null" >
+        comtele = #{comtele,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null" >
+        productname = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="comzipcode != null" >
+        comzipcode = #{comzipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="comadd != null" >
+        comadd = #{comadd,jdbcType=VARCHAR},
+      </if>
+      <if test="happendtime != null" >
+        happendtime = #{happendtime,jdbcType=DATE},
+      </if>
+      <if test="happendaddress != null" >
+        happendaddress = #{happendaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="belongarea != null" >
+        belongarea = #{belongarea,jdbcType=INTEGER},
+      </if>
+      <if test="yuan != null" >
+        yuan = #{yuan,jdbcType=REAL},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="dispute != null" >
+        dispute = #{dispute,jdbcType=VARCHAR},
+      </if>
+      <if test="specific != null" >
+        _specific = #{specific,jdbcType=VARCHAR},
+      </if>
+      <if test="processstatu != null" >
+        processstatu = #{processstatu,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where complainregid = #{complainregid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.gov.wh.complain.sys.pojo.Complainreg" >
+    update complainreg
+    set userid = #{userid,jdbcType=VARCHAR},
+      feedbackid = #{feedbackid,jdbcType=VARCHAR},
+      shuntid = #{shuntid,jdbcType=VARCHAR},
+      returnid = #{returnid,jdbcType=VARCHAR},
+      regdept = #{regdept,jdbcType=VARCHAR},
+      register = #{register,jdbcType=VARCHAR},
+      regtime = #{regtime,jdbcType=DATE},
+      _type = #{type,jdbcType=VARCHAR},
+      cname = #{cname,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=BIT},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      respect = #{respect,jdbcType=VARCHAR},
+      atype = #{atype,jdbcType=VARCHAR},
+      zipcode = #{zipcode,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      becompany = #{becompany,jdbcType=VARCHAR},
+      comtele = #{comtele,jdbcType=VARCHAR},
+      productname = #{productname,jdbcType=VARCHAR},
+      comzipcode = #{comzipcode,jdbcType=VARCHAR},
+      comadd = #{comadd,jdbcType=VARCHAR},
+      happendtime = #{happendtime,jdbcType=DATE},
+      happendaddress = #{happendaddress,jdbcType=VARCHAR},
+      belongarea = #{belongarea,jdbcType=INTEGER},
+      yuan = #{yuan,jdbcType=REAL},
+      num = #{num,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      dispute = #{dispute,jdbcType=VARCHAR},
+      _specific = #{specific,jdbcType=VARCHAR},
+      processstatu = #{processstatu,jdbcType=VARCHAR}
+    where complainregid = #{complainregid,jdbcType=VARCHAR}
+  </update>
+</mapper>
